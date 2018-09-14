@@ -11,19 +11,14 @@ var config = {
     }
 };
 
+var newProduct = {
+    'title' : 'More about node',
+    'description' : 'node, javascript, http',
+    'price' : '100'
+};
+
 var client = http.request(config, function(res){
     console.log(res.statusCode);
-    res.on('data', function(body){
-        console.log('Result'+body);
-    });
 });
 
-var newProduct = JSON.stringify({
-    title : 'More about node',
-    description : 'node, javascript, http',
-    price : '100'
-});
-
-console.log(newProduct);
-
-client.end(newProduct);
+client.end(JSON.stringify(newProduct));
