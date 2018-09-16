@@ -1,9 +1,12 @@
 module.exports = function(appExpress) {
 
-    var listProducts = function(req, res) {
+    appExpress.get('/products', function(req, res, next) {
         var connection = appExpress.infra.dbConnection();
         var productsDAO = new appExpress.infra.DAOProducts(connection);
         productsDAO.list(function(err, result) {
+            if(err){
+                return next(err);
+            }
             res.format({
                 html: function() {
                     res.render('products/list', {list: result});
@@ -14,10 +17,7 @@ module.exports = function(appExpress) {
             });
         });
         connection.end();
-    }
-
-
-    appExpress.get('/products', listProducts);
+    });
 
     appExpress.get('/products/form', function(req, res){
         res.render('products/form', {errorsValidator : {}, product: {}});

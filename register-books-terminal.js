@@ -1,11 +1,11 @@
 var http = require('http');
 
 var config = {
-    host: 'localhost',
+    hostname: 'localhost',
     port: 8080,
     path: '/products',
     method: 'post', 
-    hearders: {
+    headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     }
